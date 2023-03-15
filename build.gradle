@@ -1,0 +1,109 @@
+buildscript {
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.6.0'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'java'
+    id 'war'
+}
+
+//apply plugin: "io.spring.dependency-management"
+
+group = 'com.frank.spring.eureka'
+version = '0.0.1'
+sourceCompatibility = 1.8
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+    maven { url 'https://repo.spring.io/milestone' }
+    maven { url 'https://repo.spring.io/snapshot' }
+    mavenCentral()
+}
+
+
+
+//tasks.named('test') {
+//    useJUnitPlatform()
+//}
+
+ext {
+    bootVersion = '2.6.0'
+    fastjsonVer = '1.2.83'
+    jodaVer = '2.2'
+    druidVer = '1.1.10'
+    lombokVer = '1.18.22'
+    flywayVer = '5.2.4'
+    codecVer = '1.4'
+    jwtVer = '3.4.1'
+    jpyVer = '1.0'
+//    cloudVersion = 'Hoxton.SR12'
+    cloudVersion = '2021.0.2'
+}
+
+war {
+    enabled = true
+}
+
+task createProperties(dependsOn: processResources) {
+    doLast {
+        new File("$buildDir/resources/main/version.properties").withWriter { w ->
+            Properties p = new Properties()
+            p['version'] = project.version.toString()
+            p.store w, null
+        }
+    }
+}
+
+classes {
+    dependsOn createProperties
+}
+
+test {
+    useJUnitPlatform()
+}
+
+
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${cloudVersion}"
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${bootVersion}"
+    }
+}
+
+dependencies {
+//    compile 'org.springframework.cloud:spring-cloud-starter-config'
+    compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+
+
+
+    implementation("com.alibaba:fastjson:${fastjsonVer}")
+
+
+    compile ("org.springframework.boot:spring-boot-starter-parent:${bootVersion}")
+    compile ("org.springframework.boot:spring-boot-starter-web:${bootVersion}")
+//    implementation ("org.springframework.boot:spring-boot-starter-data-jpa:${bootVersion}")
+//    implementation ("org.springframework.boot:spring-boot-starter-web-services:${bootVersion}")
+    compile ("org.springframework.boot:spring-boot-starter-actuator:${bootVersion}")
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'org.postgresql:postgresql'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+//    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
