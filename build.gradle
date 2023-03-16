@@ -5,7 +5,7 @@ buildscript {
 }
 
 plugins {
-    id 'org.springframework.boot' version '2.6.0'
+    id 'org.springframework.boot' version '2.3.12.RELEASE'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
     id 'java'
     id 'war'
@@ -36,13 +36,9 @@ repositories {
 }
 
 
-
-//tasks.named('test') {
-//    useJUnitPlatform()
-//}
-
 ext {
-    bootVersion = '2.6.0'
+//    bootVersion = '2.5.3'
+    bootVersion = '2.3.12.RELEASE'
     fastjsonVer = '1.2.83'
     jodaVer = '2.2'
     druidVer = '1.1.10'
@@ -51,8 +47,9 @@ ext {
     codecVer = '1.4'
     jwtVer = '3.4.1'
     jpyVer = '1.0'
-//    cloudVersion = 'Hoxton.SR12'
-    cloudVersion = '2021.0.2'
+    cloudVersion = 'Hoxton.SR12'
+    springBootAdminVersion = '2.3.1'
+//    cloudVersion = '2021.0.2'
 }
 
 war {
@@ -90,7 +87,7 @@ dependencies {
 //    compile 'org.springframework.cloud:spring-cloud-starter-config'
     compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
 
-
+    compile ("de.codecentric:spring-boot-admin-starter-server:${springBootAdminVersion}")
 
     implementation("com.alibaba:fastjson:${fastjsonVer}")
 
@@ -98,7 +95,7 @@ dependencies {
     compile ("org.springframework.boot:spring-boot-starter-parent:${bootVersion}")
     compile ("org.springframework.boot:spring-boot-starter-web:${bootVersion}")
 //    implementation ("org.springframework.boot:spring-boot-starter-data-jpa:${bootVersion}")
-//    implementation ("org.springframework.boot:spring-boot-starter-web-services:${bootVersion}")
+    implementation ("org.springframework.boot:spring-boot-starter-web-services:${bootVersion}")
     compile ("org.springframework.boot:spring-boot-starter-actuator:${bootVersion}")
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

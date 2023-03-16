@@ -1,5 +1,6 @@
 package com.frank.spring.eureka.server.config;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -7,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @Author IChen.Chu
  * @Date 2023/03/15
  */
-//@Configuration
+@Configuration
 public class CorsConfig implements WebMvcConfigurer {
 
     @Override
