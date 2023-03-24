@@ -97,13 +97,8 @@ dependencyManagement {
 
 dependencies {
     compile ("org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:${cloudEurekaVersion}")
-//    compile ("org.springframework.cloud:spring-cloud-netflix-eureka-server:${cloudEurekaVersion}")
 
-    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-netflix-eureka-server
-//    implementation 'org.springframework.cloud:spring-cloud-netflix-eureka-server:2.2.9.RELEASE'
-
-
-//    compile ("de.codecentric:spring-boot-admin-starter-server:${springBootAdminVersion}")
+    compile ("de.codecentric:spring-boot-admin-starter-server:${springBootAdminVersion}")
 
     implementation("com.alibaba:fastjson:${fastjsonVer}")
 
