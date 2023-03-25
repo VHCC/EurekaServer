@@ -6,7 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
-@EnableAdminServer
+//@EnableAdminServer
+@EnableEurekaServer
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class ServerApplication {
 

@@ -23,3 +23,7 @@ Spring Cloud并不是停止维护，而是从2020年开始转向社区驱动的�
 服务网关：Gateway、Zuul
 服务配置：Nacos、Config
 服务总线：Nacos、Bus
+
+nohup java -jar eureka-server.jar  > /dev/null  2>&1 &
+
+ps -ef|grep java
